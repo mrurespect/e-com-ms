@@ -4,9 +4,3 @@
 [submodule "spring-cloud-gateway"]
 	path = spring-cloud-gateway
 	url = https://github.com/mrurespect/spring-cloud-gateway
-[submodule "inventory-service"]
-	path = inventory-service
-	url = https://github.com/mrurespect/inventory-service
-[submodule "eureka-discovery-service"]
-	path = eureka-discovery-service
-	url = https://github.com/mrurespect/-eureka-discovery-service
