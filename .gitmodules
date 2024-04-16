@@ -10,3 +10,6 @@
 [submodule "inventory-service"]
 	path = inventory-service
 	url = https://github.com/mrurespect/inventory-service
+[submodule "billing-service"]
+	path = billing-service
+	url = https://github.com/mrurespect/Billing-service
