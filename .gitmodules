@@ -13,3 +13,6 @@
 [submodule "billing-service"]
 	path = billing-service
 	url = https://github.com/mrurespect/Billing-service
+[submodule "Billing-service"]
+	path = Billing-service
+	url = https://github.com/mrurespect/Billing-service
