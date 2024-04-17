@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/eureka-discovery-service/pom.xml" />
         <option value="$PROJECT_DIR$/inventory-service/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/Billing-service/pom.xml" />
       </list>
     </option>
   </component>
