@@ -16,6 +16,3 @@
 [submodule "config-repo"]
 	path = config-repo
 	url = git@github.com:mrurespect/config-repo.git
-[submodule "spring-cloud-gateway"]
-	path = spring-cloud-gateway
-	url = https://github.com/mrurespect/spring-cloud-gateway
