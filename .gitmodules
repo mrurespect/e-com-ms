@@ -16,3 +16,6 @@
 [submodule "Billing-service"]
 	path = Billing-service
 	url = https://github.com/mrurespect/Billing-service
+[submodule "config-repo"]
+	path = config-repo
+	url = git@github.com:mrurespect/config-repo.git
