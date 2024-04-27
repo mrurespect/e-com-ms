@@ -16,3 +16,6 @@
 [submodule "config-repo"]
 	path = config-repo
 	url = git@github.com:mrurespect/config-repo.git
+[submodule "account-service"]
+	path = account-service
+	url = git@github.com:mrurespect/account-service.git
