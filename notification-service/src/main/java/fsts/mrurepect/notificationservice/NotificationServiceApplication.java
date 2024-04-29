@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.vault.core.VaultKeyValueOperationsSupport;
 import org.springframework.vault.core.VaultTemplate;
@@ -12,6 +13,7 @@ import org.springframework.vault.support.Versioned;
 import java.util.Map;
 
 @SpringBootApplication
+@EnableConfigurationProperties(VaultConfig.class)
 public class NotificationServiceApplication {
     @Autowired
     private  VaultTemplate vaultTemplate;
@@ -22,7 +24,7 @@ public class NotificationServiceApplication {
             System.out.println("Connected to vault: " + vaultTemplate.opsForSys().health());
             Versioned.Metadata metadata =
                 vaultTemplate.opsForVersionedKeyValue("secret")
-                    .put("keypair", Map.of("username", "admin", "password", "admin"));
+                    .put("keypair", Map.of("vault.username", "admin", "vault.password", "admin"));
         };
     }
 
