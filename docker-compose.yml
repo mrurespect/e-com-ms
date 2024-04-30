@@ -1,0 +1,105 @@
+#on declare les services
+services:
+  e-com-discovery-service :
+    build: ./eureka-discovery-service
+    container_name: e-com-discovery-service
+    ports:
+      - "8761:8761"
+    expose:
+      - "8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      retries: 10
+  e-com-config-service :
+    build: ./config-service
+    container_name: e-com-config-service
+    ports:
+      - "8888:8888"
+    expose:
+      - "8888"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+    depends_on:
+      e-com-discovery-service :
+          condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 10s
+      retries: 10
+  e-com-customer-service :
+    build: ./customer-service
+    container_name: e-com-customer-service
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+      - CONFIG_SERVICE_URI=http://e-com-config-service:8888
+    depends_on:
+      e-com-config-service:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+      interval: 10s
+      retries: 10
+  e-com-account-service:
+    build: ./account-service
+    container_name: e-com-account-service
+    ports:
+      - "8085:8085"
+    expose:
+      - "8085"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+      - CONFIG_SERVICE_URI=http://e-com-config-service:8888
+    depends_on:
+      e-com-customer-service:
+        condition: service_healthy
+
+  e-com-inventory-service:
+    container_name: e-com-inventory-service
+    build: ./inventory-service
+    ports:
+      - "8082:8082"
+    expose:
+      - "8082"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+      - CONFIG_SERVICE_URI=http://e-com-config-service:8888
+    depends_on:
+      e-com-config-service:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
+      interval: 10s
+      retries: 10
+  e-com-billing-service:
+    container_name: e-com-billing-service
+    build: ./Billing-service
+    ports:
+      - "8083:8083"
+    expose:
+      - "8083"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+      - CONFIG_SERVICE_URI=http://e-com-config-service:8888
+    depends_on:
+      e-com-customer-service:
+        condition: service_healthy
+      e-com-inventory-service:
+        condition: service_healthy
+  e-com-gateway-service:
+    container_name: e-com-gateway-service
+    build: ./spring-cloud-gateway
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      - EUREKA_URI=http://e-com-discovery-service:8761/eureka
+      - CONFIG_SERVICE_URI=http://e-com-config-service:8888
+    depends_on:
+      e-com-config-service:
+        condition: service_healthy
