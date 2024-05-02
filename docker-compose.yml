@@ -10,7 +10,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
       interval: 10s
-      retries: 10
+      retries: 15
   e-com-config-service :
     build: ./config-service
     container_name: e-com-config-service
@@ -26,7 +26,7 @@ services:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
       interval: 10s
-      retries: 10
+      retries: 15
   e-com-customer-service :
     build: ./customer-service
     container_name: e-com-customer-service
@@ -43,7 +43,7 @@ services:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
       interval: 10s
-      retries: 10
+      retries: 15
   e-com-account-service:
     build: ./account-service
     container_name: e-com-account-service
@@ -74,7 +74,7 @@ services:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
       interval: 10s
-      retries: 10
+      retries: 15
   e-com-billing-service:
     container_name: e-com-billing-service
     build: ./Billing-service
@@ -103,3 +103,10 @@ services:
     depends_on:
       e-com-config-service:
         condition: service_healthy
+  e-com-react-consumer:
+    container_name: e-com-react-consumer
+    build: ./e-com-react-front
+    ports:
+      - "3000:80"
+    expose:
+      - "3000"

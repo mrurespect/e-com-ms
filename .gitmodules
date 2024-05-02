@@ -19,3 +19,6 @@
 [submodule "account-service"]
 	path = account-service
 	url = git@github.com:mrurespect/account-service.git
+[submodule "e-com-react-front"]
+	path = e-com-react-front
+	url = git@github.com:mrurespect/e-com-react-front.git
