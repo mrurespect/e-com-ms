@@ -1,6 +1,7 @@
 #on declare les services
 services:
   e-com-discovery-service :
+    image: mrurespect/e-com-discovery-service
     build: ./eureka-discovery-service
     container_name: e-com-discovery-service
     ports:
@@ -12,6 +13,7 @@ services:
       interval: 10s
       retries: 15
   e-com-config-service :
+    image: mrurespect/e-com-config-service
     build: ./config-service
     container_name: e-com-config-service
     ports:
@@ -28,6 +30,7 @@ services:
       interval: 10s
       retries: 15
   e-com-customer-service :
+    image: mrurespect/e-com-customer-service
     build: ./customer-service
     container_name: e-com-customer-service
     ports:
@@ -45,6 +48,7 @@ services:
       interval: 10s
       retries: 15
   e-com-account-service:
+    image: mrurespect/e-com-account-service
     build: ./account-service
     container_name: e-com-account-service
     ports:
@@ -59,6 +63,7 @@ services:
         condition: service_healthy
 
   e-com-inventory-service:
+    image: mrurespect/e-com-inventory-service
     container_name: e-com-inventory-service
     build: ./inventory-service
     ports:
@@ -76,6 +81,7 @@ services:
       interval: 10s
       retries: 15
   e-com-billing-service:
+    image: mrurespect/e-com-billing-service
     container_name: e-com-billing-service
     build: ./Billing-service
     ports:
@@ -91,6 +97,7 @@ services:
       e-com-inventory-service:
         condition: service_healthy
   e-com-gateway-service:
+    image: mrurespect/e-com-gateway-service
     container_name: e-com-gateway-service
     build: ./spring-cloud-gateway
     ports:
@@ -104,6 +111,7 @@ services:
       e-com-config-service:
         condition: service_healthy
   e-com-react-consumer:
+    image: mrurespect/e-com-react-consumer
     container_name: e-com-react-consumer
     build: ./e-com-react-front
     ports:
